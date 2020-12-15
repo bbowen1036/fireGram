@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 const ImageGrid = ({ setSelectedImg }) => {
   const { docs } = useFirestore('images');
 
-  const handleClick = (url) => {
-    setSelectedImg(url)
+  const handleClick = (obj) => {
+    setSelectedImg(obj)
   };
   
 
@@ -19,7 +19,7 @@ const ImageGrid = ({ setSelectedImg }) => {
           layout
           className='img-wrap' 
           key={doc.id} 
-          onClick={() => handleClick(doc.url)}
+          onClick={() => handleClick({url: doc.url, id: doc.id})}
           >
           <motion.img src={doc.url} alt="uploaded-pic" 
             initial={{ opacity: 0 }}
@@ -28,6 +28,7 @@ const ImageGrid = ({ setSelectedImg }) => {
           />
         </motion.div>
       ))}
+      
     </div>
   )
 };
